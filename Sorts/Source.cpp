@@ -25,7 +25,7 @@ void bubbleSort(std::vector<int>& vec) {
 
 void evenOddSort(std::vector<int>& vec) {
 	for (size_t i = 0, j = 0; i < vec.size(); ++i){
-		if (!(vec[i] & 1)){//если !=1 то сначала четные, проверка младшего бита логическое И
+		if (!(vec[i] & 1)){//if ! first even, logic AND
 			std::swap(vec[i], vec[j++]);
 		}
 	}

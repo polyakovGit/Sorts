@@ -35,11 +35,42 @@ void vectorShow(const std::vector<int>& vec) {
 		std::cout << num << ' ';
 	//copy(vec.begin(), vec.end(), std::ostream_iterator<int>(std::cout, " "));
 }
+
+void merge(std::vector<int>& vec, int left, int right, int middle) {
+	int j = left, k = middle + 1, count = right - left + 1;
+	std::vector<int> vecTemp;
+	vecTemp.reserve(count);
+	for (int i = 0; i < count; ++i) {
+		if (j <= middle && k <= right) {
+			if (vec[j] < vec[k])
+				vecTemp.push_back(vec[j++]);
+			else vecTemp.push_back(vec[k++]);
+		}
+		else {
+			if (j <= middle)
+				vecTemp.push_back(vec[j++]);
+			else vecTemp.push_back(vec[k++]);
+		}
+	}
+	for (int i = left, j = 0; i <= right; ++i, ++j)
+		vec[i] = vecTemp[j];
+}
+
+void mergeSort(std::vector<int> &vec, int left, int right) {
+	if (left >= right)return;
+	int middle = left + (right - left) / 2;
+	mergeSort(vec, left, middle);
+	mergeSort(vec, middle + 1, right);
+	merge(vec, left, right, middle);
+}
+
 int main() {
 	std::vector<int> vec{ 5,1,4,3,2,6 };
 	//bubbleSort(vec);
 	//evenOddSort(vec);
-	quickSort(vec, 0,vec.size()-1);
+	std::cout << vec.size();
+	//mergeSort(vec, 0, vec.size()-1);
+	//quickSort(vec, 0,vec.size()-1);
 	vectorShow(vec);
 
 

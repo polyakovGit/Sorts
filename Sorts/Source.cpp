@@ -2,20 +2,22 @@
 #include <vector>
 #include <thread>
 
-void quickSort(std::vector<int>& vec, int start, int end) {
-	int i = start, j = end, pivot = vec[end / 2];
-	do {
+template <typename T>
+void quickSort(std::vector<T>& vec, size_t start, size_t end) {
+	size_t i = start, j = end - 1;
+	T pivot = vec[end / 2];
+	while (i <= j) {
 		while (vec[i] < pivot)++i;
 		while (vec[j] > pivot)--j;
 		if (i <= j) {
 			std::swap(vec[i++], vec[j--]);
 		}
-	} while (i <= j);
+	};
 	if (i < end)quickSort(vec, start + i, end - i);
-	if (j > 0)quickSort(vec, 0, j);
+	if (j > 0)quickSort(vec, start, j);
 }
-
-void bubbleSort(std::vector<int>& vec) {
+template <typename T>
+void bubbleSort(std::vector<T>& vec) {
 	for (size_t k = vec.size() - 1; k > 0; --k) {
 		for (size_t i = 0; i < k; ++i) {
 			if (vec[i] > vec[i + 1])
@@ -24,14 +26,16 @@ void bubbleSort(std::vector<int>& vec) {
 	}
 }
 
-void evenOddSort(std::vector<int>& vec) {
+template <typename T>
+void evenOddSort(std::vector<T>& vec) {
 	for (size_t i = 0, j = 0; i < vec.size(); ++i) {
 		if (!(vec[i] & 1)) {//if ! first even, logic AND
 			std::swap(vec[i], vec[j++]);
 		}
 	}
 }
-void vectorShow(const std::vector<int>& vec) {
+template <typename T>
+void vectorShow(const std::vector<T>& vec) {
 	for (auto& num : vec)
 		std::cout << num << ' ';
 	//copy(vec.begin(), vec.end(), std::ostream_iterator<int>(std::cout, " "));
@@ -101,8 +105,8 @@ int main() {
 	//evenOddSort(vec);
 	//std::cout << vec.size();
 	//mergeSort(vec, 0, vec.size()-1);
-	mergeSortThreads(vec, 0, vec.size() - 1);
-	//quickSort(vec, 0,vec.size()-1);
+	//mergeSortThreads(vec, 0, vec.size() - 1);
+	quickSort(vec, 0, vec.size());
 	vectorShow(vec);
 
 

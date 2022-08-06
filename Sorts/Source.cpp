@@ -4,9 +4,9 @@
 #include <thread>
 
 template <typename T, size_t SIZE>
-void quickSort(std::array<T, SIZE>& array, size_t start, size_t end) {
-	size_t i = start, j = end - 1;
-	T pivot = array[end / 2];
+void quickSort(std::array<T, SIZE>& array, size_t left, size_t right) {
+	size_t i = left, j = right - 1;
+	T pivot = array[(i+j) / 2];
 	while (i <= j) {
 		while (array[i] < pivot)++i;
 		while (array[j] > pivot)--j;
@@ -14,8 +14,8 @@ void quickSort(std::array<T, SIZE>& array, size_t start, size_t end) {
 			std::swap(array[i++], array[j--]);
 		}
 	};
-	if (i < end)quickSort(array, start + i, end - i);
-	if (j > 0)quickSort(array, start, j);
+	if (i < right)quickSort(array, i, right);
+	if (j > left)quickSort(array, left, j);
 }
 template <typename T>
 void bubbleSort(std::vector<T>& vec) {
@@ -108,13 +108,13 @@ void mergeSortThreads(std::vector<int>& vec, int left, int right) {
 }
 
 int main() {
-	std::vector<int> vec{ 5,1,4,3,2,6 };
+	std::vector<int> vec{ 5,1,4,3,2,6,2,2,3,7 };
 	//bubbleSort(vec);
 	//evenOddSort(vec);
 	//std::cout << vec.size();
 	//mergeSort(vec, 0, vec.size()-1);
 	//mergeSortThreads(vec, 0, vec.size() - 1);
-	std::array <int, 6> arr{ 5,1,4,3,2,6 };
+	std::array <int, 9> arr{ 5,1,4,3,2,6,2,3,1 };
 	quickSort(arr, 0, arr.size());
 	arrayShow(arr);
 	//vectorShow(vec);

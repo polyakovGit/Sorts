@@ -5,7 +5,7 @@
 
 template <typename T, size_t SIZE>
 void quickSort(std::array<T, SIZE>& array, size_t left, size_t right) {
-	size_t i = left, j = right - 1;
+	size_t i = left, j = right-1;
 	T pivot = array[(i+j) / 2];
 	while (i <= j) {
 		while (array[i] < pivot)++i;
@@ -15,7 +15,7 @@ void quickSort(std::array<T, SIZE>& array, size_t left, size_t right) {
 		}
 	};
 	if (i < right)quickSort(array, i, right);
-	if (j > left)quickSort(array, left, j);
+	if (j > left)quickSort(array, left, j+1);
 }
 template <typename T>
 void bubbleSort(std::vector<T>& vec) {
@@ -114,7 +114,7 @@ int main() {
 	//std::cout << vec.size();
 	//mergeSort(vec, 0, vec.size()-1);
 	//mergeSortThreads(vec, 0, vec.size() - 1);
-	std::array <int, 9> arr{ 5,1,4,3,2,6,2,3,1 };
+	std::array <int, 9> arr{ 8,7,5,1,4,3,2,6,2 };
 	quickSort(arr, 0, arr.size());
 	arrayShow(arr);
 	//vectorShow(vec);

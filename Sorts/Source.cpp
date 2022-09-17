@@ -6,7 +6,7 @@
 template <typename T, size_t SIZE>
 void quickSort(std::array<T, SIZE>& array, size_t left, size_t right) {
 	size_t i = left, j = right-1;
-	T pivot = array[(i+j) / 2];
+	T pivot = array[left+(right-left) / 2];
 	while (i <= j) {
 		while (array[i] < pivot)++i;
 		while (array[j] > pivot)--j;
@@ -114,7 +114,7 @@ int main() {
 	//std::cout << vec.size();
 	//mergeSort(vec, 0, vec.size()-1);
 	//mergeSortThreads(vec, 0, vec.size() - 1);
-	std::array <int, 9> arr{ 8,7,5,1,4,3,2,6,2 };
+	std::array <int, 10> arr{ 6,2,1,9,2,7,2,3,7,3 };
 	quickSort(arr, 0, arr.size());
 	arrayShow(arr);
 	//vectorShow(vec);
